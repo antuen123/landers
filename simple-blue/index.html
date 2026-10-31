@@ -1,0 +1,1684 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://resources.landerlab.io/css/styles.css" landerlab-styles><link rel="stylesheet" href="https://landerlab-quiz.pages.dev/style.css" landerlab-styles></head>
+  <body>
+    <style>
+      :root {
+        --navy: #0b2b5e;
+        --navy-dark: #071f45;
+        --navy-soft: #123a75;
+        --orange: #f7941d;
+        --orange-dark: #e3830c;
+        --yellow: #ffc61a;
+        --mint: #e9f8f2;
+        --green: #14a06a;
+        --ink: #132238;
+        --muted: #586883;
+        --bg: #ffffff;
+        --bg-soft: #f4f7fb;
+        --line: #e2e8f3;
+        --radius: 18px;
+        --shadow-sm: 0 2px 10px rgba(11, 43, 94, 0.06);
+        --shadow: 0 24px 50px -26px rgba(11, 43, 94, 0.35);
+        --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+        --ll-font-heading: var(--font-heading);
+        --ll-font-body: var(--font-body);
+        --ll-color-background: var(--bg);
+        --wrap: 1180px;
+      }
+
+      *,
+      *::before,
+      *::after { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; background-color: var(--navy-dark); }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: var(--font-body);
+        font-size: 16px;
+        line-height: 1.65;
+        color: var(--ink);
+        background-color: var(--bg);
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      img { display: block; max-width: 100%; height: auto; }
+      a { color: inherit; text-decoration: none; }
+      p { margin: 0; }
+      ul { margin: 0; padding: 0; list-style: none; }
+
+      h1, h2, h3, h4, h5, h6 {
+        margin: 0;
+        font-family: var(--font-heading);
+        font-weight: 800;
+        color: var(--navy);
+        line-height: 1.12;
+        letter-spacing: -0.02em;
+        text-wrap: balance;
+      }
+
+      .wrap {
+        width: 100%;
+        max-width: var(--wrap);
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      section { scroll-margin-top: 88px; }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+        padding: 7px 14px;
+        border: 1px solid #cddbef;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.75);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: var(--navy-soft);
+      }
+
+      .eyebrow-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--green);
+      }
+
+      .kicker {
+        font-family: var(--font-heading);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--orange-dark);
+      }
+
+      .section-title {
+        font-size: clamp(26px, 5.4vw, 42px);
+        margin-top: 10px;
+      }
+
+      .section-lead {
+        margin-top: 14px;
+        font-size: 16.5px;
+        color: var(--muted);
+        max-width: 640px;
+      }
+
+      .center { text-align: center; }
+      .center .section-lead { margin-left: auto; margin-right: auto; }
+
+      .ic { width: 24px; height: 24px; flex: 0 0 auto; }
+      .ic-sm { width: 18px; height: 18px; }
+      .ic-lg { width: 28px; height: 28px; }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 16px 26px;
+        border-radius: 12px;
+        background: var(--orange);
+        color: var(--navy-dark);
+        font-family: var(--font-heading);
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: 0.01em;
+        text-align: center;
+        box-shadow: 0 14px 26px -14px rgba(247, 148, 29, 0.95);
+        transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .btn:hover {
+        background: var(--orange-dark);
+        transform: translateY(-1px);
+        box-shadow: 0 18px 30px -14px rgba(227, 131, 12, 0.95);
+      }
+
+      .btn-lg { padding: 19px 30px; font-size: 17px; }
+      .btn-block { width: 100%; }
+
+      .micro {
+        margin-top: 12px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      /* Announcement bar */
+      .topbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 4px 14px;
+        padding: 10px 16px;
+        background: var(--yellow);
+        color: var(--navy-dark);
+        text-align: center;
+      }
+
+      .topbar p {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13.5px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+      }
+
+      .topbar strong { font-family: var(--font-heading); font-weight: 800; }
+      .topbar .sep { opacity: 0.5; }
+      .topbar-note { display: none; font-size: 12.5px; opacity: 0.85; }
+
+      /* Header */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 60;
+        background: rgba(255, 255, 255, 0.94);
+        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(10px);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        min-height: 64px;
+      }
+
+      .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        flex: 0 0 auto;
+      }
+
+      .logo-mark {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: var(--navy);
+      }
+
+      .logo-text {
+        font-family: var(--font-heading);
+        font-size: 19px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--navy);
+      }
+
+      .logo-text span { color: var(--green); }
+
+      .site-nav { display: none; }
+
+      .site-nav a {
+        font-size: 14.5px;
+        font-weight: 500;
+        color: var(--navy-soft);
+      }
+
+      .site-nav a:hover { color: var(--orange-dark); }
+
+      .header-cta { display: none; }
+      .header-btn-sm { font-size: 12.5px; padding: 10px 13px; }
+
+      .header-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 11px 16px;
+        border-radius: 10px;
+        background: var(--navy);
+        color: #fff;
+        font-family: var(--font-heading);
+        font-size: 13.5px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .header-btn:hover { background: var(--navy-soft); }
+
+      /* Hero */
+      .hero {
+        position: relative;
+        padding: 32px 0 52px;
+        background: linear-gradient(180deg, #f7f9fd 0%, #eaf1fa 100%);
+        overflow: hidden;
+      }
+
+      .hero-grid { display: grid; gap: 36px; }
+
+      .hero h1 { font-size: clamp(32px, 7.4vw, 46px); line-height: 1.07; }
+
+      .hero .lead {
+        margin-top: 16px;
+        font-size: clamp(16px, 2.1vw, 19px);
+        color: var(--muted);
+        max-width: 560px;
+      }
+
+      .hero .lead strong { color: var(--navy); font-weight: 700; }
+
+      .hero-cta { margin-top: 26px; }
+
+      .hero-cta .btn { width: 100%; }
+
+      .benefits {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px 14px;
+        margin-top: 32px;
+      }
+
+      .benefits li { display: flex; flex-direction: column; gap: 9px; }
+
+      .b-ic {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: #fff;
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .benefits p {
+        font-size: 13px;
+        line-height: 1.45;
+        color: var(--navy-soft);
+      }
+
+      .benefits strong { font-weight: 700; color: var(--navy); }
+
+      .hero-visual {
+        position: relative;
+        width: 100%;
+        max-width: 470px;
+        margin: 0 auto;
+      }
+
+      .hero-frame {
+        position: relative;
+        overflow: hidden;
+        border-radius: 200px 200px 26px 26px;
+        border: 6px solid #fff;
+        background: #dbe5f2;
+        box-shadow: var(--shadow);
+        aspect-ratio: 1 / 1.1;
+      }
+
+      .hero-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 18%;
+      }
+
+      .stock-pill {
+        position: absolute;
+        top: 16px;
+        right: 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 14px;
+        border-radius: 999px;
+        background: #fff;
+        box-shadow: var(--shadow-sm);
+        font-size: 11.5px;
+        font-weight: 600;
+        color: var(--navy);
+      }
+
+      .pulse {
+        position: relative;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--green);
+      }
+
+      .pulse::after {
+        content: "";
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        border: 2px solid var(--green);
+        opacity: 0.4;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% { transform: scale(0.7); opacity: 0.5; }
+        70% { transform: scale(1.5); opacity: 0; }
+        100% { opacity: 0; }
+      }
+
+      .hero-price-card {
+        position: absolute;
+        left: -4px;
+        bottom: 18px;
+        padding: 12px 16px;
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: var(--shadow);
+      }
+
+      .hpc-label {
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .hpc-price {
+        font-family: var(--font-heading);
+        font-size: 27px;
+        font-weight: 800;
+        color: var(--navy);
+        line-height: 1.1;
+      }
+
+      .hpc-price span {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--muted);
+      }
+
+      .hpc-note { font-size: 11.5px; color: var(--muted); }
+
+      /* Press strip */
+      .press {
+        padding: 22px 0 26px;
+        background: var(--navy);
+      }
+
+      .press-title {
+        text-align: center;
+        font-size: 12.5px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: #b9cae6;
+      }
+
+      .press-logos {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 14px 26px;
+        margin-top: 16px;
+        color: #fff;
+      }
+
+      .press-logos span {
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        opacity: 0.92;
+      }
+
+      .pl-serif { font-family: Georgia, 'Times New Roman', serif; }
+      .pl-caps { font-size: 14px !important; letter-spacing: 0.08em; }
+      .pl-yahoo { font-size: 18px !important; letter-spacing: -0.04em; }
+
+      /* Stats */
+      .results { padding: 52px 0; background: var(--bg); }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 30px;
+      }
+
+      .stat {
+        padding: 20px 14px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--bg-soft);
+        text-align: center;
+      }
+
+      .stat-num {
+        font-family: var(--font-heading);
+        font-size: clamp(27px, 6.4vw, 38px);
+        font-weight: 800;
+        line-height: 1;
+        color: var(--navy);
+      }
+
+      .stat-label {
+        margin-top: 8px;
+        font-size: 12.5px;
+        line-height: 1.4;
+        color: var(--muted);
+      }
+
+      .footnote {
+        margin-top: 18px;
+        font-size: 11.5px;
+        line-height: 1.55;
+        color: #8494ad;
+        text-align: center;
+      }
+
+      /* Steps */
+      .steps-section { padding: 52px 0; background: var(--bg-soft); }
+
+      .steps {
+        display: grid;
+        gap: 22px;
+        margin-top: 34px;
+      }
+
+      .step {
+        position: relative;
+        text-align: left;
+        padding: 28px 22px 24px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #fff;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .step-num {
+        position: absolute;
+        top: -15px;
+        left: 22px;
+        display: grid;
+        place-items: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--navy);
+        color: #fff;
+        font-family: var(--font-heading);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .step h3 { margin-top: 8px; font-size: 20px; }
+
+      .step p {
+        margin-top: 8px;
+        font-size: 14.5px;
+        color: var(--muted);
+      }
+
+      .step-ic {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: var(--mint);
+      }
+
+      .steps-cta { margin-top: 30px; text-align: center; }
+      .steps-cta .btn { width: 100%; }
+
+      /* Testimonials */
+      .reviews { padding: 52px 0; background: var(--bg); }
+
+      .review-grid {
+        display: grid;
+        gap: 16px;
+        margin-top: 32px;
+      }
+
+      .review {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        padding: 24px 22px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #fff;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .stars {
+        display: flex;
+        gap: 3px;
+        color: var(--orange);
+        font-size: 15px;
+        letter-spacing: 0.1em;
+        line-height: 1;
+      }
+
+      .review blockquote {
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.65;
+        color: #2b3a52;
+      }
+
+      .review-author {
+        margin-top: auto;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .avatar {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--mint);
+        color: var(--green);
+        font-family: var(--font-heading);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .review-author p {
+        font-family: var(--font-heading);
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--navy);
+      }
+
+      .review-author small {
+        display: block;
+        font-size: 11.5px;
+        font-weight: 500;
+        color: var(--muted);
+      }
+
+      .reviews .footnote { text-align: left; margin-top: 20px; }
+
+      /* Pricing */
+      .pricing { padding: 52px 0; background: var(--bg-soft); }
+
+      .plans {
+        display: grid;
+        gap: 24px;
+        margin-top: 36px;
+      }
+
+      .plan {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 28px 22px 24px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: #fff;
+        box-shadow: var(--shadow);
+      }
+
+      .plan-featured { border: 2px solid var(--orange); }
+
+      .plan-badge {
+        position: absolute;
+        top: -13px;
+        left: 22px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: var(--orange);
+        color: var(--navy-dark);
+        font-family: var(--font-heading);
+        font-size: 10.5px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .plan-badge.dark { background: var(--navy); color: #fff; }
+
+      .plan-name {
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: var(--muted);
+      }
+
+      .plan h3 {
+        margin-top: 2px;
+        font-size: 27px;
+      }
+
+      .price-row {
+        display: flex;
+        align-items: flex-end;
+        gap: 6px;
+        margin-top: 12px;
+      }
+
+      .price-from {
+        align-self: center;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .price-amount {
+        font-family: var(--font-heading);
+        font-size: clamp(42px, 10vw, 54px);
+        font-weight: 800;
+        line-height: 0.95;
+        color: var(--navy);
+        letter-spacing: -0.04em;
+      }
+
+      .price-per {
+        padding-bottom: 6px;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--muted);
+      }
+
+      .price-tagline {
+        margin-top: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--green);
+      }
+
+      .plan-desc {
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 1px dashed var(--line);
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .plan-desc strong { color: var(--navy); font-weight: 700; }
+
+      .plan-list {
+        display: grid;
+        gap: 9px;
+        margin: 16px 0 22px;
+      }
+
+      .plan-list li {
+        display: flex;
+        gap: 9px;
+        align-items: flex-start;
+        font-size: 14px;
+        color: #2b3a52;
+      }
+
+      .plan-list .ic { width: 18px; height: 18px; margin-top: 2px; }
+
+      .plan .btn { margin-top: auto; }
+
+      .plan .micro { text-align: center; }
+
+      .plans-note {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 10px 24px;
+        margin-top: 28px;
+        font-size: 12.5px;
+        color: var(--muted);
+      }
+
+      .plans-note p { display: inline-flex; align-items: center; gap: 7px; }
+
+      .plans-note .ic { width: 16px; height: 16px; }
+
+      /* Approach */
+      .approach {
+        padding: 56px 0;
+        background: linear-gradient(160deg, var(--navy) 0%, var(--navy-dark) 100%);
+        color: #fff;
+      }
+
+      .approach h2 { color: #fff; max-width: 720px; }
+
+      .approach-lead {
+        margin-top: 16px;
+        max-width: 660px;
+        font-size: 16px;
+        color: #c3d3ea;
+      }
+
+      .approach-lead strong { color: #fff; }
+
+      .approach-grid {
+        display: grid;
+        gap: 14px;
+        margin-top: 32px;
+      }
+
+      .approach-card {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.07);
+      }
+
+      .approach-card h3 {
+        font-size: 17px;
+        color: #fff;
+        line-height: 1.25;
+      }
+
+      .approach-card p {
+        margin-top: 5px;
+        font-size: 13.5px;
+        color: #b9cae6;
+      }
+
+      .a-ic {
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        flex: 0 0 auto;
+        border-radius: 11px;
+        background: rgba(247, 148, 29, 0.18);
+      }
+
+      .approach-cta { margin-top: 30px; }
+      .approach-cta .btn { width: 100%; }
+
+      /* Included */
+      .included { padding: 52px 0; background: var(--bg); }
+
+      .included-grid { display: grid; gap: 28px; }
+
+      .included-img {
+        overflow: hidden;
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+      }
+
+      .included-img img {
+        width: 100%;
+        aspect-ratio: 4 / 3.4;
+        object-fit: cover;
+      }
+
+      .included-card {
+        padding: 26px 22px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: var(--bg-soft);
+      }
+
+      .included-card h2 { font-size: clamp(24px, 5vw, 32px); }
+
+      .included-list {
+        display: grid;
+        gap: 11px;
+        margin: 20px 0 24px;
+      }
+
+      .included-list li {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        font-size: 14.5px;
+        font-weight: 500;
+        color: var(--navy-soft);
+      }
+
+      .included-list .ic { width: 20px; height: 20px; margin-top: 1px; }
+
+      .included-start {
+        margin-bottom: 14px;
+        font-family: var(--font-heading);
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--navy);
+      }
+
+      .included-start strong { color: var(--orange-dark); }
+
+      .included-card .btn { width: 100%; }
+
+      .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .badge-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 7px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #fff;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--navy-soft);
+      }
+
+      .badge-chip .ic { width: 15px; height: 15px; }
+
+      /* FAQ */
+      .faq { padding: 52px 0; background: var(--bg-soft); }
+
+      .faq-head {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .faq-contact {
+        font-size: 13.5px;
+        color: var(--muted);
+      }
+
+      .faq-contact a {
+        font-weight: 600;
+        color: var(--navy);
+        text-decoration: underline;
+      }
+
+      .faq-list { margin-top: 28px; }
+
+      .faq-item {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .faq-item + .faq-item { margin-top: 10px; }
+
+      .faq-item summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 17px 18px;
+        cursor: pointer;
+        font-family: var(--font-heading);
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.35;
+        color: var(--navy);
+        list-style: none;
+      }
+
+      .faq-item summary::-webkit-details-marker { display: none; }
+
+      .faq-item summary .ic { transition: transform 0.2s ease; }
+
+      .faq-item[open] summary .ic { transform: rotate(180deg); }
+
+      .faq-answer {
+        padding: 0 18px 18px;
+        font-size: 14.5px;
+        line-height: 1.65;
+        color: var(--muted);
+      }
+
+      /* Final CTA */
+      .final {
+        position: relative;
+        padding: 56px 0;
+        background: linear-gradient(140deg, var(--navy-soft) 0%, var(--navy-dark) 100%);
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .final::before {
+        content: "";
+        position: absolute;
+        top: -120px;
+        right: -80px;
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(247, 148, 29, 0.35) 0%, rgba(247, 148, 29, 0) 70%);
+      }
+
+      .final h2 {
+        position: relative;
+        color: #fff;
+        font-size: clamp(27px, 6vw, 44px);
+        max-width: 760px;
+        margin: 0 auto;
+      }
+
+      .final p.final-sub {
+        position: relative;
+        margin: 14px auto 0;
+        max-width: 560px;
+        font-size: 16px;
+        color: #c3d3ea;
+      }
+
+      .final .btn {
+        position: relative;
+        width: 100%;
+        margin-top: 26px;
+      }
+
+      .final-trust {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 8px 20px;
+        margin-top: 20px;
+        font-size: 12.5px;
+        color: #b9cae6;
+      }
+
+      .final-trust p { display: inline-flex; align-items: center; gap: 7px; }
+      .final-trust .ic { width: 15px; height: 15px; }
+
+      /* Footer */
+      .site-footer {
+        padding: 40px 0 26px;
+        background: var(--navy-dark);
+        color: #9fb3d1;
+        font-size: 13px;
+      }
+
+      .footer-top {
+        display: grid;
+        gap: 26px;
+        padding-bottom: 26px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .footer-logo {
+        font-family: var(--font-heading);
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: #fff;
+      }
+
+      .footer-logo span { color: #5ee0b0; }
+
+      .footer-tagline { margin-top: 8px; max-width: 320px; line-height: 1.6; }
+
+      .footer-h {
+        margin-bottom: 10px;
+        font-family: var(--font-heading);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #fff;
+      }
+
+      .footer-list { display: grid; gap: 7px; }
+
+      .footer-list a { color: #9fb3d1; }
+      .footer-list a:hover { color: #fff; }
+
+      .footer-list li { display: flex; align-items: center; gap: 8px; }
+      .footer-list .ic { width: 15px; height: 15px; }
+
+      .disclaimer {
+        margin-top: 24px;
+        padding-top: 4px;
+        font-size: 10.5px;
+        line-height: 1.7;
+        color: #7e93b3;
+      }
+
+      .disclaimer p + p { margin-top: 10px; }
+
+      .footer-bottom {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 22px;
+        padding-top: 18px;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        font-size: 12px;
+        color: #7e93b3;
+      }
+
+      /* Mobile sticky CTA */
+      .mobile-cta {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 70;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 14px;
+        background: #fff;
+        border-top: 1px solid var(--line);
+        box-shadow: 0 -10px 30px -18px rgba(11, 43, 94, 0.6);
+        transform: translateY(105%);
+        transition: transform 0.25s ease;
+      }
+
+      .mobile-cta.show { transform: translateY(0); }
+
+      .mcta-copy { flex: 1 1 auto; min-width: 0; }
+
+      .mcta-price {
+        font-family: var(--font-heading);
+        font-size: 15px;
+        font-weight: 800;
+        line-height: 1.2;
+        color: var(--navy);
+      }
+
+      .mcta-note { font-size: 10.5px; color: var(--muted); }
+
+      .mobile-cta .btn {
+        flex: 0 0 auto;
+        padding: 12px 16px;
+        font-size: 13.5px;
+      }
+
+      @media (min-width: 576px) {
+        .topbar p { font-size: 14.5px; }
+        .topbar-note { display: block; }
+
+        .hero { padding: 44px 0 64px; }
+        .hero-cta .btn { width: auto; }
+        .hero-cta .micro { font-size: 13.5px; }
+        .benefits { gap: 18px; }
+        .benefits p { font-size: 14px; }
+        .hero-price-card { left: 8px; bottom: 26px; padding: 14px 18px; }
+
+        .press-logos span { font-size: 18px; }
+
+        .results, .steps-section, .reviews, .pricing, .included, .faq { padding: 64px 0; }
+
+        .stats { gap: 16px; }
+        .stat { padding: 24px 16px; }
+
+        .steps-cta .btn,
+        .approach-cta .btn,
+        .included-card .btn,
+        .final .btn { width: auto; }
+
+        .review-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .review-grid .review:last-child { grid-column: 1 / -1; }
+
+        .included-card { padding: 32px 28px; }
+
+        .faq-head { flex-direction: row; align-items: flex-end; justify-content: space-between; }
+        .faq-list { margin-top: 32px; }
+      }
+
+      @media (min-width: 768px) {
+        .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
+        .review-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .review-grid .review:last-child { grid-column: auto; }
+        .approach-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .included-grid { grid-template-columns: 1fr 1fr; align-items: stretch; gap: 40px; }
+        .included-img { height: 100%; }
+        .included-img img { height: 100%; aspect-ratio: auto; }
+        .approach { padding: 72px 0; }
+      }
+
+      @media (min-width: 1024px) {
+        .wrap { padding: 0 32px; }
+
+        .site-nav {
+          display: flex;
+          align-items: center;
+          gap: 26px;
+          margin-left: auto;
+          margin-right: 6px;
+        }
+
+        .header-cta { display: block; }
+        .header-btn-sm { display: none; }
+
+        .hero { padding: 56px 0 76px; }
+        .hero-grid { grid-template-columns: 1.08fr 0.92fr; align-items: center; gap: 48px; }
+        .hero h1 { font-size: 48px; }
+        .hero .lead { font-size: 18.5px; }
+        .hero-cta { display: block; }
+        .hero-cta .micro { margin-top: 12px; max-width: 100%; }
+        .benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 24px; }
+        .benefits p { font-size: 13.5px; }
+        .hero-visual { max-width: none; }
+
+        .results, .steps-section, .reviews, .pricing, .included, .faq { padding: 80px 0; }
+
+        .section-lead { font-size: 17px; }
+
+        .plan { padding: 32px 28px 28px; }
+        .approach { padding: 88px 0; }
+        .approach .approach-lead { font-size: 17px; }
+        .final { padding: 76px 0; }
+        .mobile-cta { display: none; }
+        .site-footer { padding: 52px 0 28px; }
+        .footer-top { grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; }
+      }
+
+      @media (min-width: 1440px) {
+        .hero h1 { font-size: 54px; }
+        .hero .lead { font-size: 19.5px; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .js-anim .reveal { opacity: 1; transform: none; transition: none; }
+        .pulse::after { animation: none; }
+        .btn:hover { transform: none; }
+      }
+    </style>
+
+    <div class="topbar" id="topbr" data-ll-name="Announcement Bar">
+      <p id="mga6i">
+        <span id="k8sjm" class="pulse" aria-hidden="true"></span>
+        Semaglutide <strong id="i1wov">$89/mo</strong>
+        <span id="uk8ac" class="sep" aria-hidden="true">·</span>
+        Tirzepatide <strong id="tmvjd">$118/mo</strong>
+      </p>
+      <p id="svykc" class="topbar-note">Free shipping and doctor visit included</p>
+    </div>
+
+    <header class="site-header" id="siteh" data-ll-name="Header">
+      <div id="ugc3a" class="wrap header-inner">
+        <a id="o8bgi" class="logo" href="#hero1" aria-label="Chime Health home">
+          <span id="speyn" class="logo-mark" aria-hidden="true">
+            <img id="du3eh" class="ic" src="https://icons.ll-assets.com/lucide/activity.svg?color=%23ffffff" alt="" width="24" height="24">
+          </span>
+          <span id="ddlln" class="logo-text">Chime <span id="m9kwd">Health</span></span>
+        </a>
+        <nav id="o6kmr" class="site-nav" aria-label="Main">
+          <a id="bsdbq" href="#steps">How it works</a>
+          <a id="jupgt" href="#price">Pricing</a>
+          <a id="w7e01" href="#rvws1">Reviews</a>
+          <a id="j4y39" href="#faq01">FAQ</a>
+        </nav>
+        <div id="jpfum" class="header-cta">
+          <a id="xb1lp" class="header-btn" href="https://article.healthlifestyleinsider.com/click">
+            Check my eligibility
+            <img id="y3yfn" class="ic ic-sm" src="https://icons.ll-assets.com/lucide/arrow-right.svg?color=%23ffffff" alt="" width="18" height="18">
+          </a>
+        </div>
+        <a id="urs4a" class="header-btn header-btn-sm" href="https://article.healthlifestyleinsider.com/click">Check eligibility</a>
+      </div>
+    </header>
+
+    <main id="hq40y">
+      <section class="hero" id="hero1" data-ll-name="Hero">
+        <div id="tdnzb" class="wrap hero-grid">
+          <div id="w6w0x" class="hero-copy">
+            <p id="jwrq0" class="eyebrow"><span id="hggal" class="eyebrow-dot" aria-hidden="true"></span>100% online · US-licensed doctors</p>
+            <h1 id="poumj">Get GLP-1 medication delivered to your door.</h1>
+            <p id="spsmp" class="lead">
+              Compounded semaglutide from <strong id="vbvo4">$89/mo</strong> and tirzepatide from <strong id="j0yhw">$118/mo</strong>. One flat price covers your doctor visit, prescription, medication and shipping. No insurance needed.
+            </p>
+            <div id="vgm8o" class="hero-cta">
+              <a id="m0z7i" class="btn btn-lg" href="https://article.healthlifestyleinsider.com/click">
+                See if I qualify
+                <img id="bac5k" class="ic ic-sm" src="https://icons.ll-assets.com/lucide/arrow-right.svg?color=%230b2b5e" alt="" width="18" height="18">
+              </a>
+              <p id="fqros" class="micro">2-minute quiz · You are not charged until a licensed doctor approves you</p>
+            </div>
+            <ul id="kvkib" class="benefits">
+              <li id="qbpve">
+                <span id="rrdzo" class="b-ic"><img id="d9g67" class="ic" src="https://icons.ll-assets.com/lucide/pill.svg?color=%230b2b5e" alt="" width="24" height="24"></span>
+                <p id="ww5gu"><strong id="ugff2">Prescription</strong> weight loss medications</p>
+              </li>
+              <li id="tsjq8">
+                <span id="cokub" class="b-ic"><img id="i15gq" class="ic" src="https://icons.ll-assets.com/lucide/clock.svg?color=%230b2b5e" alt="" width="24" height="24"></span>
+                <p id="rvvg0">Get qualified with this <strong id="kj848">5&#8209;minute</strong> quiz</p>
+              </li>
+              <li id="q9uhj">
+                <span id="x4qck" class="b-ic"><img id="m81rx" class="ic" src="https://icons.ll-assets.com/lucide/shield.svg?color=%230b2b5e" alt="" width="24" height="24"></span>
+                <p id="coh9q"><strong id="uzz7i">No insurance needed,</strong> no hidden fees</p>
+              </li>
+              <li id="b66f1">
+                <span id="t5wr4" class="b-ic"><img id="hut7i" class="ic" src="https://icons.ll-assets.com/lucide/message-circle.svg?color=%230b2b5e" alt="" width="24" height="24"></span>
+                <p id="ii38t"><strong id="i2tf1">24/7 access</strong> and 1-on-1 support with our Medical Doctors</p>
+              </li>
+            </ul>
+          </div>
+          <div id="tm5w5" class="hero-visual">
+            <div id="qzi8s" class="hero-frame">
+              <img id="rsw4n" src="img/hero-woman.webp" alt="Smiling woman holding a smartphone after starting her GLP-1 weight loss program" width="800" height="880">
+            </div>
+            <p id="kgwuz" class="stock-pill"><span id="a1ltn" class="pulse" aria-hidden="true"></span>In stock and shipping today</p>
+            <div id="qj11i" class="hero-price-card">
+              <p id="zbeqc" class="hpc-label">Treatment from</p>
+              <p id="quw59" class="hpc-price">$89<span id="p1qn6">/mo</span></p>
+              <p id="jgyly" class="hpc-note">Everything included</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="press" id="press" data-ll-name="Press Logos">
+        <div id="vey93" class="wrap">
+          <p id="oodkf" class="press-title">GLP-1's are making headlines everywhere</p>
+          <div id="dngqb" class="press-logos">
+            <span id="rq49m" class="pl-serif">The New York Times</span>
+            <span id="svldr" class="pl-serif">Forbes</span>
+            <span id="ihj01" class="pl-caps">NBC NEWS</span>
+            <span id="ost6y">FOX</span>
+            <span id="w4woq" class="pl-serif">WSJ</span>
+            <span id="bcdxt" class="pl-yahoo">yahoo!<span id="fkyzx" class="pl-caps"> news</span></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="results" id="reslt" data-ll-name="Results Stats">
+        <div id="igzt6" class="wrap center reveal">
+          <p id="qpeng" class="kicker">Backed by research</p>
+          <h2 id="vxd26" class="section-title">Real results, backed by science.</h2>
+          <p id="a44yo" class="section-lead">Across clinical studies of GLP-1 therapy, patients on a medically supervised program saw:</p>
+          <div id="k9q8z" class="stats">
+            <div id="u0h84" class="stat">
+              <p id="x63ko" class="stat-num">23 lbs</p>
+              <p id="jt5it" class="stat-label">Average reduction in total body fat</p>
+            </div>
+            <div id="jsbds" class="stat">
+              <p id="llkbi" class="stat-num">6 in</p>
+              <p id="zscwj" class="stat-label">Average reduction in waist size</p>
+            </div>
+            <div id="xuhl2" class="stat">
+              <p id="t4wey" class="stat-num">16.9%</p>
+              <p id="ylkw6" class="stat-label">Average reduction in total body weight</p>
+            </div>
+            <div id="k8qlz" class="stat">
+              <p id="g8bm2" class="stat-num">6.27</p>
+              <p id="v8pdx" class="stat-label">Average decrease in body mass index</p>
+            </div>
+          </div>
+          <p id="tjom4" class="footnote">Averages reported in published clinical trials of GLP-1 medications, alongside diet and exercise. Individual results will vary.</p>
+        </div>
+      </section>
+
+      <section class="steps-section" id="steps" data-ll-name="How It Works">
+        <div id="lmucb" class="wrap center reveal">
+          <p id="o8mb0" class="kicker">Simple from start to finish</p>
+          <h2 id="ml5bk" class="section-title">Start losing weight in 3 easy steps</h2>
+          <div id="kfpzc" class="steps">
+            <div id="g7kfo" class="step">
+              <span id="d29nf" class="step-num" aria-hidden="true">1</span>
+              <span id="qud9k" class="step-ic"><img id="mn19d" class="ic" src="https://icons.ll-assets.com/lucide/sparkles.svg?color=%2314a06a" alt="" width="24" height="24"></span>
+              <h3 id="l0d6r">Take the quiz</h3>
+              <p id="rzgxo">Answer a few questions to get pre-approved in about 2 minutes.</p>
+            </div>
+            <div id="grwrn" class="step">
+              <span id="alg5n" class="step-num" aria-hidden="true">2</span>
+              <span id="zcqyn" class="step-ic"><img id="elnr9" class="ic" src="https://icons.ll-assets.com/lucide/stethoscope.svg?color=%2314a06a" alt="" width="24" height="24"></span>
+              <h3 id="t2uhp">Get prescribed</h3>
+              <p id="cy8t5">A US-licensed medical doctor reviews your intake to confirm you are a candidate.</p>
+            </div>
+            <div id="izwge" class="step">
+              <span id="dj94x" class="step-num" aria-hidden="true">3</span>
+              <span id="qfsy2" class="step-ic"><img id="qsekn" class="ic" src="https://icons.ll-assets.com/lucide/truck.svg?color=%2314a06a" alt="" width="24" height="24"></span>
+              <h3 id="vl412">Receive medication</h3>
+              <p id="rfisz">Your medication ships free from our partner pharmacy straight to your address.</p>
+            </div>
+          </div>
+          <div id="tznj2" class="steps-cta">
+            <a id="rwkiu" class="btn" href="https://article.healthlifestyleinsider.com/click">Take the 2-minute quiz</a>
+            <p id="lbnte" class="micro">Quick questionnaire · No charge until approval</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="reviews" id="rvws1" data-ll-name="Testimonials">
+        <div id="ylcfa" class="wrap reveal">
+          <div id="pl3q3" class="center">
+            <p id="o0ryr" class="kicker">Real members</p>
+            <h2 id="xh2pw" class="section-title">What life on a GLP-1 can feel like</h2>
+          </div>
+          <div id="frw45" class="review-grid">
+            <div id="tjb9f" class="review">
+              <p id="mcav7" class="stars" aria-label="5 out of 5 stars">★★★★★</p>
+              <blockquote id="o6wv0">"I've been using a GLP-1 for about seven months and I'm thrilled to share. I've also become more active and present with my friends and family."</blockquote>
+              <div id="brfyz" class="review-author">
+                <span id="s67xh" class="avatar" aria-hidden="true">KC</span>
+                <p id="hluh1">Kandice C.<small id="z1onn">Chime Health member</small></p>
+              </div>
+            </div>
+            <div id="omw78" class="review">
+              <p id="rqaum" class="stars" aria-label="5 out of 5 stars">★★★★★</p>
+              <blockquote id="lxvnr">"I have been using a GLP-1 for a year and a half. GLP-1 gave me my life back. I've put a lot of effort into creating healthy habits, but without it my effort seemed useless."</blockquote>
+              <div id="uy9mi" class="review-author">
+                <span id="ngdu6" class="avatar" aria-hidden="true">AB</span>
+                <p id="pzc63">Ariane B.<small id="x3th9">Chime Health member</small></p>
+              </div>
+            </div>
+            <div id="ahbzl" class="review">
+              <p id="mixmx" class="stars" aria-label="5 out of 5 stars">★★★★★</p>
+              <blockquote id="vke0i">"I have been on a GLP-1 medication for 14 weeks. It has completely changed my life! I have more energy than I've had in years, the food noise is gone and I can focus on my habits."</blockquote>
+              <div id="t6mez" class="review-author">
+                <span id="y0tfb" class="avatar" aria-hidden="true">J</span>
+                <p id="cztep">Jessica<small id="x7ny7">Chime Health member</small></p>
+              </div>
+            </div>
+          </div>
+          <p id="xoe30" class="footnote">Paid testimonials from real GLP-1 users. Individual results will vary.</p>
+        </div>
+      </section>
+
+      <section class="pricing" id="price" data-ll-name="Treatment Options">
+        <div id="jfl9c" class="wrap reveal">
+          <div id="f6qox" class="center">
+            <p id="q73jh" class="kicker">Treatment options</p>
+            <h2 id="y5sui" class="section-title">One flat price. Everything included.</h2>
+            <p id="hau6l" class="section-lead">Doctor consultation, prescription, 4 weeks of medication and free shipping. The same price at every dose, with no price increase as you go up.</p>
+          </div>
+          <div id="qsii2" class="plans">
+            <div id="z805e" class="plan plan-featured">
+              <p id="a13dw" class="plan-badge">Most popular</p>
+              <p id="p85dv" class="plan-name">Compounded</p>
+              <h3 id="ndfog">Semaglutide</h3>
+              <div id="ls1ae" class="price-row">
+                <span id="qvvzd" class="price-from">From</span>
+                <span id="qreqo" class="price-amount">$89</span>
+                <span id="lub1k" class="price-per">/month</span>
+              </div>
+              <p id="sm13a" class="price-tagline">Less than $2 a day</p>
+              <p id="w1pqt" class="plan-desc">One price for <strong id="ger3r">everything</strong>: doctor consultation, prescription, 4 weeks of medication and free shipping.</p>
+              <ul id="szay4" class="plan-list">
+                <li id="gbgg5"><img id="ovp9m" class="ic" src="https://icons.ll-assets.com/lucide/check.svg?color=%2314a06a" alt="" width="18" height="18"><span id="znqki">100% online doctor consultation</span></li>
+                <li id="hh0b1"><img id="x3jhm" class="ic" src="https://icons.ll-assets.com/lucide/check.svg?color=%2314a06a" alt="" width="18" height="18"><span id="nur4l">Same price for all doses</span></li>
+                <li id="uyt2g"><img id="jzw9f" class="ic" src="https://icons.ll-assets.com/lucide/check.svg?color=%2314a06a" alt="" width="18" height="18"><span id="rbbvk">Ongoing care and support</span></li>
+                <li id="a75rt"><img id="f0yrw" class="ic" src="https://icons.ll-assets.com/lucide/check.svg?color=%2314a06a" alt="" width="18" height="18"><span id="h9lky">Cancel anytime</span></li>
+              </ul>
+              <a id="y6jn0" class="btn btn-block" href="https://article.healthlifestyleinsider.com/click">
+                Get semaglutide
+                <img id="kn2en" class="ic ic-sm" src="https://icons.ll-assets.com/lucide/arrow-right.svg?color=%230b2b5e" alt="" width="18" height="18">
+              </a>
+              <p id="tmywr" class="micro">No charge until a doctor approves you</p>
+            </div>
+            <div id="iv1ms" class="plan">
+              <p id="psgbc" class="plan-badge dark">Most effective</p>
+              <p id="pktf9" class="plan-name">Compounded</p>
+              <h3 id="oc84h">Tirzepatide</h3>
+              <div id="lxh2n" class="price-row">
+                <span id="uedh7" class="price-from">From</span>
+                <span id="ze3fe" class="price-amount">$118</span>
+                <span id="ans1j" class="price-per">/month</span>
+              </div>
+              <p id="f4x8m" class="price-tagline">Less than $3 a day · #1 choice among members</p>
+              <p id="t3vyl" class="plan-desc">One price for <strong id="esccd">everything</strong>: doctor consultation, prescription, 4 weeks of medication and free shipping.</p>
+              <ul id="zcxn2" class="plan-list">
+                <li id="byev9"><img id="hwfwc" class="ic" src="https://icons.ll-assets.com/lucide/check.svg?color=%2314a06a" alt="" width="18" height="18"><span id="ja4aw">100% online doctor consultation</span></li>
+                <li id="ygydm"><img id="jxnvi" class="ic" src="https://icons.ll-assets.com/lucide/check.svg?color=%2314a06a" alt="" width="18" height="18"><span id="y8vte">Same price for all doses</span></li>
+                <li id="f8x3t"><img id="tzoz6" class="ic" src="https://icons.ll-assets.com/lucide/check.svg?color=%2314a06a" alt="" width="18" height="18"><span id="a7u3p">Ongoing care and support</span></li>
+                <li id="td7md"><img id="sylok" class="ic" src="https://icons.ll-assets.com/lucide/check.svg?color=%2314a06a" alt="" width="18" height="18"><span id="w477b">Cancel anytime</span></li>
+              </ul>
+              <a id="gmuno" class="btn btn-block" href="https://article.healthlifestyleinsider.com/click">
+                Get tirzepatide
+                <img id="xufce" class="ic ic-sm" src="https://icons.ll-assets.com/lucide/arrow-right.svg?color=%230b2b5e" alt="" width="18" height="18">
+              </a>
+              <p id="knhnv" class="micro">No charge until a doctor approves you</p>
+            </div>
+          </div>
+          <div id="c0siq" class="plans-note">
+            <p id="lj29c"><img id="fx71f" class="ic" src="https://icons.ll-assets.com/lucide/shield.svg?color=%2314a06a" alt="" width="16" height="16">No insurance needed</p>
+            <p id="hxm7k"><img id="k9oug" class="ic" src="https://icons.ll-assets.com/lucide/truck.svg?color=%2314a06a" alt="" width="16" height="16">Free, fast shipping</p>
+            <p id="qh8xr"><img id="sxsmy" class="ic" src="https://icons.ll-assets.com/lucide/lock.svg?color=%2314a06a" alt="" width="16" height="16">Secure checkout</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="approach" id="apch1" data-ll-name="Approach">
+        <div id="nverc" class="wrap reveal">
+          <p id="nk1ph" class="kicker" >Why it works</p>
+          <h2 id="m4g3q" class="section-title">Weight loss is about working with your body, not against it.</h2>
+          <p id="r0m1x" class="approach-lead">Forget the outdated myth that willpower and extreme diets can do it all. Genetics play a crucial role in body weight. Our <strong id="dd4ol">medically supervised approach</strong> works with your body's natural processes, so you can reach your goals without white-knuckling every meal.</p>
+          <div id="n4hd5" class="approach-grid">
+            <div id="p2ydt" class="approach-card">
+              <span id="zjhv7" class="a-ic"><img id="iaz24" class="ic" src="https://icons.ll-assets.com/lucide/trending-up.svg?color=%23f7941d" alt="" width="24" height="24"></span>
+              <div id="dam77">
+                <h3 id="cpkv3">Research-backed weight management</h3>
+                <p id="ygo1k">Protocols built on GLP-1 clinical evidence, not guesswork.</p>
+              </div>
+            </div>
+            <div id="p0n1b" class="approach-card">
+              <span id="j0mo1" class="a-ic"><img id="y0tip" class="ic" src="https://icons.ll-assets.com/lucide/message-circle.svg?color=%23f7941d" alt="" width="24" height="24"></span>
+              <div id="n42dc">
+                <h3 id="z3kp8">24/7 access and 1-on-1 support</h3>
+                <p id="td1wz">Message your Medical Doctors any time in the patient portal.</p>
+              </div>
+            </div>
+            <div id="p1now" class="approach-card">
+              <span id="te6l1" class="a-ic"><img id="ews7g" class="ic" src="https://icons.ll-assets.com/lucide/percent.svg?color=%23f7941d" alt="" width="24" height="24"></span>
+              <div id="eh44z">
+                <h3 id="jmkuo">One price, no hidden fees</h3>
+                <p id="v9f58">Your quote is your total. Shipping is always included.</p>
+              </div>
+            </div>
+          </div>
+          <div id="rw1ba" class="approach-cta">
+            <a id="c8xe0" class="btn" href="https://article.healthlifestyleinsider.com/click">
+              Start now
+              <img id="jesr1" class="ic ic-sm" src="https://icons.ll-assets.com/lucide/arrow-right.svg?color=%230b2b5e" alt="" width="18" height="18">
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="included" id="incl1" data-ll-name="What's Included">
+        <div id="be770" class="wrap included-grid reveal">
+          <div id="bbtjf" class="included-img">
+            <img id="fuhxu" src="img/measuring-tape.webp" alt="Woman measuring her waist with a measuring tape at home" width="800" height="680">
+          </div>
+          <div id="npkf2" class="included-card">
+            <p id="exj5q" class="kicker">Your program</p>
+            <h2 id="w4us3">Your personalized program starts here</h2>
+            <p id="d6oyb" class="section-lead">Everything you need to start and stay on track, in one monthly price.</p>
+            <ul id="n9cem" class="included-list">
+              <li id="hfm2z"><img id="dikpb" class="ic" src="https://icons.ll-assets.com/lucide/check-circle.svg?color=%2314a06a" alt="" width="20" height="20"><span id="v8vfu">100% online doctor consultation</span></li>
+              <li id="ax3o3"><img id="v3gyy" class="ic" src="https://icons.ll-assets.com/lucide/check-circle.svg?color=%2314a06a" alt="" width="20" height="20"><span id="p89p8">GLP-1 medication (if approved)</span></li>
+              <li id="f3s1o"><img id="unjax" class="ic" src="https://icons.ll-assets.com/lucide/check-circle.svg?color=%2314a06a" alt="" width="20" height="20"><span id="h1xw5">Ongoing care and support</span></li>
+              <li id="tvet9"><img id="r8idd" class="ic" src="https://icons.ll-assets.com/lucide/check-circle.svg?color=%2314a06a" alt="" width="20" height="20"><span id="ghtlu">24/7 doctor access and 1-on-1 support</span></li>
+              <li id="xxljg"><img id="ys661" class="ic" src="https://icons.ll-assets.com/lucide/check-circle.svg?color=%2314a06a" alt="" width="20" height="20"><span id="y0j9h">Free, fast shipping to your door</span></li>
+            </ul>
+            <p id="q11ij" class="included-start">Start today for as low as <strong id="i0sbk">$89</strong></p>
+            <a id="ytxp9" class="btn" href="https://article.healthlifestyleinsider.com/click">Take the quiz</a>
+            <div id="r62lg" class="badges">
+              <p id="zkv4i" class="badge-chip"><img id="o4i6l" class="ic" src="https://icons.ll-assets.com/lucide/clock.svg?color=%230b2b5e" alt="" width="15" height="15">Prescribed within ~4 hours</p>
+              <p id="op0u5" class="badge-chip"><img id="fvzy5" class="ic" src="https://icons.ll-assets.com/lucide/truck.svg?color=%230b2b5e" alt="" width="15" height="15">Free, fast shipping</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq" id="faq01" data-ll-name="FAQ">
+        <div id="pewp9" class="wrap reveal">
+          <div id="xne4k" class="faq-head">
+            <div id="y6ht1">
+              <p id="ztgoa" class="kicker">Good to know</p>
+              <h2 id="u1s96" class="section-title">Frequently asked questions</h2>
+            </div>
+            <p id="i8y8s" class="faq-contact">Still have questions? Email <a id="a9amd" href="mailto:support@chimehealth.com">support@chimehealth.com</a></p>
+          </div>
+          <div id="aofih" class="faq-list">
+            <details id="ub7ll" class="faq-item" open>
+              <summary id="rbk4m">
+                How much does the program cost?
+                <img id="zq12l" class="ic" src="https://icons.ll-assets.com/lucide/chevron-down.svg?color=%230b2b5e" alt="" width="24" height="24">
+              </summary>
+              <p id="az3rx" class="faq-answer">Semaglutide is $89 per month and tirzepatide is $118 per month. That flat price covers your doctor consultation, prescription, four weeks of medication and shipping. The price stays the same at every dose and there are no additional fees.</p>
+            </details>
+            <details id="uae16" class="faq-item">
+              <summary id="il5nx">
+                Do I need insurance?
+                <img id="pah14" class="ic" src="https://icons.ll-assets.com/lucide/chevron-down.svg?color=%230b2b5e" alt="" width="24" height="24">
+              </summary>
+              <p id="hh5xs" class="faq-answer">No. The program is cash pay, so there are no insurance approvals, copays or surprise bills. What you see at checkout is what you pay.</p>
+            </details>
+            <details id="o9eem" class="faq-item">
+              <summary id="svzrs">
+                How do I qualify for the medication?
+                <img id="kf45d" class="ic" src="https://icons.ll-assets.com/lucide/chevron-down.svg?color=%230b2b5e" alt="" width="24" height="24">
+              </summary>
+              <p id="bs7i5" class="faq-answer">Simply fill out the questionnaire and one of our USA-licensed doctors will review your answers and prescribe the medication if you qualify.</p>
+            </details>
+            <details id="eoiv3" class="faq-item">
+              <summary id="yy32p">
+                Do I pay anything before I know I am approved?
+                <img id="iuee9" class="ic" src="https://icons.ll-assets.com/lucide/chevron-down.svg?color=%230b2b5e" alt="" width="24" height="24">
+              </summary>
+              <p id="ao7xe" class="faq-answer">No. You will not be charged anything until a doctor approves your prescription. Payments are placed on hold at checkout and only captured once your prescription is sent to the pharmacy after doctor approval.</p>
+            </details>
+            <details id="u0ucn" class="faq-item">
+              <summary id="ptwfm">
+                What if I want to talk to a doctor after signing up?
+                <img id="p1z6i" class="ic" src="https://icons.ll-assets.com/lucide/chevron-down.svg?color=%230b2b5e" alt="" width="24" height="24">
+              </summary>
+              <p id="a77jx" class="faq-answer">Our patient portal lets you message your doctor 24/7, and our support team is available 7 days a week.</p>
+            </details>
+            <details id="yi5a4" class="faq-item">
+              <summary id="oroap">
+                Is blood work required?
+                <img id="s8dbw" class="ic" src="https://icons.ll-assets.com/lucide/chevron-down.svg?color=%230b2b5e" alt="" width="24" height="24">
+              </summary>
+              <p id="g3270" class="faq-answer">Blood work is not required, but it is always recommended. You may submit recent blood work with your medical intake form if you have it.</p>
+            </details>
+            <details id="mr198" class="faq-item">
+              <summary id="zvlp0">
+                What if I am on weight loss medications already?
+                <img id="nx1ud" class="ic" src="https://icons.ll-assets.com/lucide/chevron-down.svg?color=%230b2b5e" alt="" width="24" height="24">
+              </summary>
+              <p id="cvyxz" class="faq-answer">We welcome patients who are already taking weight loss medications. The transition to our program is simple and seamless, just leave it to us.</p>
+            </details>
+            <details id="nowaz" class="faq-item">
+              <summary id="za8jf">
+                How does the subscription work?
+                <img id="boqj5" class="ic" src="https://icons.ll-assets.com/lucide/chevron-down.svg?color=%230b2b5e" alt="" width="24" height="24">
+              </summary>
+              <p id="xmw86" class="faq-answer">Your medication is shipped automatically every month, with no need to reorder. You are notified before each shipment, and you can cancel at any time. There are no long-term contracts or cancellation fees.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="final" id="final" data-ll-name="Final CTA">
+        <div id="u96qc" class="wrap">
+          <h2 id="bx604">Your first month could cost less than a takeaway dinner.</h2>
+          <p id="l7q05" class="final-sub">Answer the quiz, get reviewed by a US-licensed doctor and have medication shipped free to your door. Cancellation is always up to you.</p>
+          <a id="gri8q" class="btn btn-lg" href="https://article.healthlifestyleinsider.com/click">
+            See if I qualify
+            <img id="e92mh" class="ic ic-sm" src="https://icons.ll-assets.com/lucide/arrow-right.svg?color=%230b2b5e" alt="" width="18" height="18">
+          </a>
+          <div id="syc29" class="final-trust">
+            <p id="g3516"><img id="hudaa" class="ic" src="https://icons.ll-assets.com/lucide/shield.svg?color=%23c3d3ea" alt="" width="15" height="15">No insurance needed</p>
+            <p id="agydc"><img id="kqgva" class="ic" src="https://icons.ll-assets.com/lucide/truck.svg?color=%23c3d3ea" alt="" width="15" height="15">Free shipping</p>
+            <p id="buizt"><img id="tynz3" class="ic" src="https://icons.ll-assets.com/lucide/check-circle.svg?color=%23c3d3ea" alt="" width="15" height="15">Cancel anytime</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="foot1" data-ll-name="Footer">
+      <div id="sdtyp" class="wrap">
+        <div id="n449i" class="footer-top">
+          <div id="yqwa4">
+            <p id="qgblz" class="footer-logo">Chime <span id="dpg9p">Health</span></p>
+            <p id="ieqrk" class="footer-tagline">Medical weight management with GLP-1 medication, prescribed online by US-licensed doctors and shipped to your door.</p>
+          </div>
+          <div id="bz3kb">
+            <p id="azg98" class="footer-h">Contact</p>
+            <ul id="c9irl" class="footer-list">
+              <li id="fq6ua"><img id="b1ym6" class="ic" src="https://icons.ll-assets.com/lucide/mail.svg?color=%239fb3d1" alt="" width="15" height="15"><a id="ntv9z" href="mailto:support@chimehealth.com">support@chimehealth.com</a></li>
+              <li id="fna9i"><img id="bhhaq" class="ic" src="https://icons.ll-assets.com/lucide/clock.svg?color=%239fb3d1" alt="" width="15" height="15"><span id="sf5o2">7 days a week, 8am to 8pm EST</span></li>
+            </ul>
+          </div>
+          <div id="s7q7q">
+            <p id="k7q0x" class="footer-h">Legal</p>
+            <ul id="y9c7a" class="footer-list">
+              <li id="e026p"><a id="rabcu" href="#" data-ll-no-track>Privacy policy</a></li>
+              <li id="rq6t9"><a id="gbwif" href="#" data-ll-no-track>Terms of service</a></li>
+              <li id="sh4sa"><a id="f6tag" href="#" data-ll-no-track>HIPAA policy</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="i8xv3" class="disclaimer">
+          <p id="gu2o9">*Completing the assessment on the Chime Health website does not establish a doctor-patient relationship between the individual and Chime Health. Wasef Health and Beluga Health, networks of US-licensed physicians committed to rigorous medical protocols to ensure patient safety, have established exclusionary criteria to determine whether an individual is ineligible for weight loss prescriptions. The responses provided in the Chime Health assessment will determine if an individual is considered excluded or non-excluded. Chime Health serves as a facilitator, connecting non-excluded individuals with these networks and their clinicians. The decision to prescribe weight loss medications lies solely with Wasef Health and Beluga Health clinicians, thereby forming the doctor-patient relationship with those seeking a prescription.</p>
+          <p id="yqm7u">Results from the compounded medications available through the Chime Health platform may vary. These compounded medications, including semaglutide and tirzepatide, are manufactured in 503A Outsourcing Facilities. Although these facilities are subject to stringent regulation, the medications themselves are not FDA-approved, as they are tailored to individual prescriptions for specific patients. The decision to use compounded medications is based on the licensed provider's medical judgment, informed by a telehealth consultation and the patient's medical history.</p>
+          <p id="plmnw">We advise all potential users of compounded semaglutide and compounded tirzepatide to discuss the particular risks and benefits of compounded medications with their healthcare provider. As Chime Health is not involved in the production of these medications, the medication you receive may differ in appearance from what is depicted on the website.</p>
+        </div>
+
+        <div id="v2onb" class="footer-bottom">
+          <p id="ufdur">© 2026 Chime Health. All rights reserved.</p>
+          <p id="gkrgk">Semaglutide $89/mo · Tirzepatide $118/mo</p>
+        </div>
+      </div>
+    </footer>
+
+    <div class="mobile-cta" id="mobct" data-ll-name="Mobile Sticky CTA">
+      <div id="l4783" class="mcta-copy">
+        <p id="kkwsx" class="mcta-price">From $89/mo</p>
+        <p id="lrmxt" class="mcta-note">Doctor + medication + shipping</p>
+      </div>
+      <a id="yfj0z" class="btn" href="https://article.healthlifestyleinsider.com/click">Check my eligibility</a>
+    </div>
+
+    <script data-ll-name="Page Scripts">
+      (function () {
+        // Mobile sticky CTA after the hero
+        var bar = document.getElementById('mobct');
+        var hero = document.getElementById('hero1');
+        var ticking = false;
+
+        function updateBar() {
+          if (!bar || !hero) { return; }
+          var past = window.scrollY > hero.offsetTop + hero.offsetHeight - 120;
+          var nearFooter = window.scrollY + window.innerHeight > document.body.offsetHeight - 90;
+          bar.classList.toggle('show', past && !nearFooter);
+          ticking = false;
+        }
+
+        window.addEventListener('scroll', function () {
+          if (!ticking) {
+            ticking = true;
+            window.requestAnimationFrame(updateBar);
+          }
+        }, { passive: true });
+        updateBar();
+      })();
+    </script>
+
+    <script data-ll-name="Tracking Config">
+      window.LL_TRACKING = {
+        params: ['aff_id', 'tocid', 'toclid', 'sub4']
+      };
+    </script>
+  <script type="text/javascript" src="https://article.healthlifestyleinsider.com/track.js"></script></body>
+</html>
